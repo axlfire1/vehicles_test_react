@@ -16,9 +16,66 @@ class VehiclesList extends React.Component {
       })
   }
 
+  filter_vehicles() {
+    var input = document.getElementsByName("input").value;
+    console.log("EL content is" + input);
+  }
+
   render() {
     return (
       <div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+          <h3>
+            Filter vehicles:
+          </h3>
+          <table class="table table-striped">
+            <tr>
+              <td>
+                <label>
+                  Input:
+                </label>
+              </td>
+              <td>
+                <label>
+                  <input type="text" name="input"></input>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>
+                Option:
+                </label>
+              </td>
+              <td>
+                <label>
+                <select id="options">
+                  <option value="brand_name">Brand</option>
+                  <option value="model_name">Model</option>
+                  <option value="mileage">Mileage</option>
+                  <option value="price">Price</option>
+                  <option value="year">Year</option>
+                </select>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <button 
+                  type="submit"
+                  class="btn btn-outline-primary" 
+                  onClick={() => this.filter_vehicles() }
+                >
+                  Search
+                </button>
+              </td>
+            </tr>
+          </table>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-6 offset-md-3">
             <br /><br />
