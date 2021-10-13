@@ -41,9 +41,9 @@ class VehiclesList extends React.Component {
       this.setState({ vehicles });
     })
 
-    document.getElementById("test_label").innerHTML = input.value;
-    document.getElementById("test_label2").innerHTML = option.value;
-    document.getElementById("test_label3").innerHTML = 'query uri' + this.url;
+    document.getElementById("test_label").innerHTML = 'input value: ' + input.value;
+    document.getElementById("test_label2").innerHTML = 'option value: ' + option.value;
+    document.getElementById("test_label3").innerHTML = 'query uri: ' + this.url;
   }
 
   render() {
