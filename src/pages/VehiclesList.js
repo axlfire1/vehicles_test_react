@@ -3,27 +3,59 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class VehiclesList extends React.Component {
+    url = "";
 
     state = {
       vehicles: []
     }
 
-  componentDidMount() {
-    axios.get(`http://localhost:3000/v1/vehicles`)
-      .then(res => {
-        const vehicles = res.data;
-        this.setState({ vehicles });
-      })
-  }
-
   filter_vehicles() {
-    var input = document.getElementsByName("input").value;
-    console.log("EL content is" + input);
+    var input = document.getElementById("input");
+    var option = document.getElementById("options");
+
+    switch (option.value) {
+      case "brand_name":
+        this.url = 'http://localhost:3000/v1/vehicles?brand_name=' + input.value
+        break;
+      case "model_name":
+        this.url = 'http://localhost:3000/v1/vehicles?model_name=' + input.value
+        break;
+      case "mileage":
+        this.url = 'http://localhost:3000/v1/vehicles?mileage[lteq]=' + input.value
+        break;
+      case "price":
+        this.url = 'http://localhost:3000/v1/vehicles?price[lteq]=' + input.value
+        console.log(this.url);
+        break;
+      case "year":
+        this.url = 'http://localhost:3000/v1/vehicles?year[lteq]=' + input.value
+        console.log(this.url);
+        break;
+      default:
+        this.url = 'http://localhost:3000/v1/vehicles'
+        break;
+    }
+
+    axios.get(this.url).then(res => {
+      const vehicles = res.data;
+      this.setState({ vehicles });
+    })
+
+    document.getElementById("test_label").innerHTML = input.value;
+    document.getElementById("test_label2").innerHTML = option.value;
+    document.getElementById("test_label3").innerHTML = 'query uri' + this.url;
   }
 
   render() {
     return (
       <div>
+        <div>
+          <label id="test_label"></label>
+          <br />
+          <label id="test_label2"></label>
+          <br />
+          <label id="test_label3"></label>
+        </div>
         <div class="row">
           <div class="col-md-6 offset-md-3">
           <h3>
@@ -38,7 +70,7 @@ class VehiclesList extends React.Component {
               </td>
               <td>
                 <label>
-                  <input type="text" name="input"></input>
+                  <input type="text" id="input" name="input"></input>
                 </label>
               </td>
             </tr>
@@ -51,6 +83,7 @@ class VehiclesList extends React.Component {
               <td>
                 <label>
                 <select id="options">
+                  <option value="all">All</option>
                   <option value="brand_name">Brand</option>
                   <option value="model_name">Model</option>
                   <option value="mileage">Mileage</option>
@@ -88,6 +121,7 @@ class VehiclesList extends React.Component {
                 <th>Model</th>
                 <th>Year</th>
                 <th>Mileage</th>
+                <th>Price</th>
               </tr>
               {
                 this.state.vehicles ?
@@ -100,6 +134,7 @@ class VehiclesList extends React.Component {
                       <td>{vehicle.model_name}</td>
                       <td>{vehicle.year}</td>
                       <td>{vehicle.mileage}</td>
+                      <td>{vehicle.price}</td>
                     </tr>
                   )
                   :
