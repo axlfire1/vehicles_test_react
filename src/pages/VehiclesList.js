@@ -21,14 +21,14 @@ class VehiclesList extends React.Component {
         this.url = 'http://localhost:3000/v1/vehicles?model_name=' + input.value
         break;
       case "mileage":
-        this.url = 'http://localhost:3000/v1/vehicles?mileage[lteq]=' + input.value
+        this.url = 'http://localhost:3000/v1/vehicles?mileage[lt]=' + input.value
         break;
       case "price":
-        this.url = 'http://localhost:3000/v1/vehicles?price[lteq]=' + input.value
+        this.url = 'http://localhost:3000/v1/vehicles?price[lt]=' + input.value
         console.log(this.url);
         break;
       case "year":
-        this.url = 'http://localhost:3000/v1/vehicles?year[lteq]=' + input.value
+        this.url = 'http://localhost:3000/v1/vehicles?year[lt]=' + input.value
         console.log(this.url);
         break;
       default:
